@@ -6,42 +6,32 @@
  */
 package ej.demo.ui.widget.page;
 
-import ej.widget.basic.AbstractSlider;
-import ej.widget.basic.picto.PictoCheck;
-import ej.widget.basic.picto.PictoRadio;
-import ej.widget.basic.picto.PictoSlider;
-import ej.widget.basic.picto.PictoSwitch;
-import ej.widget.composed.Toggle;
-import ej.widget.composed.ToggleComposite;
-import ej.widget.toggle.RadioModel;
+import ej.container.Canvas;
+import ej.demo.ui.widget.style.Images;
+import ej.mwt.Widget;
+import ej.widget.basic.Image;
+import ej.widget.basic.image.ImageHelper;
 
 /**
  * This page illustrates the widgets rendered with some pictos.
  */
-public class Game extends WidgetPage {
+public class Game extends AbstractDemoPage {
 
 	@Override
 	protected String getTitle() {
-		return "Pictos"; //$NON-NLS-1$
+		return "Game"; //$NON-NLS-1$
 	}
 
 	@Override
-	protected ToggleComposite newCheckBox(String string) {
-		return new Toggle(new PictoCheck(), string);
+	protected Widget createMainContent() {
+		Image hand = new Image(ImageHelper.loadImage(Images.HAND));
+		Image cash = new Image(ImageHelper.loadImage(Images.CASH_500));
+		Canvas canvas = new Canvas();
+		canvas.add(hand, 480 - 300, 106 - 83, 0, 0); // 480,272 largeur ecrans
+		canvas.add(cash, 440 - 300, 106 - 46, 0, 0);
+		// TODO Auto-generated method stub
+		return canvas;
 	}
 
-	@Override
-	protected ToggleComposite newRadioButton(String string) {
-		return new Toggle(new RadioModel(), new PictoRadio(), string);
-	}
-
-	@Override
-	protected ToggleComposite newSwitch(String string) {
-		return new Toggle(new PictoSwitch(), string);
-	}
-
-	@Override
-	protected AbstractSlider newSlider(int min, int max, int initial) {
-		return new PictoSlider(min, max, initial);
-	}
+	// press,drag,release
 }
