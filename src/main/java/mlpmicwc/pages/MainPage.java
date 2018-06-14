@@ -37,11 +37,26 @@ public class MainPage extends Page {
 		this.container.setLast(Btnlist);
 		setWidget(this.container);
 
-		// ButtonEvent handler
+		// ButtonEvent handler Game
 		game.addOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick() {
 				Program.show(new GamePage());
+			}
+		});
+
+		// ButtonEvent handler Scores
+		score.addOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick() {
+				Program.show(new ScoresPage());
+			}
+		});
+		// ButtonEvent handler Settings
+		settings.addOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick() {
+				Program.show(new SettingsPage());
 			}
 		});
 	}
