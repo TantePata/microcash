@@ -14,5 +14,5 @@ public interface Images {
 	/**
 	 * The MicroEJ logo.
 	 */
-	String LOGO = "/images/microej_logo.png"; //$NON-NLS-1$
+	String LOGO = "/images/logo.png"; //$NON-NLS-1$
 }
