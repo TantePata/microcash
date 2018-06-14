@@ -16,13 +16,14 @@ import ej.widget.composed.ButtonComposite;
 import ej.widget.listener.OnClickListener;
 
 /**
- * Main page of the application. It allows to access to all the pages of the application.
+ * Main page of the application. It allows to access to all the pages of the
+ * application.
  */
 public class MainPage extends AbstractDemoPage {
 
 	@Override
 	protected String getTitle() {
-		return "MicroEJ Widgets"; //$NON-NLS-1$
+		return "Micro Ca$h"; //$NON-NLS-1$
 	}
 
 	@Override
@@ -34,13 +35,10 @@ public class MainPage extends AbstractDemoPage {
 		// Scrollable list
 
 		List listComposite = new List(false);
-		listComposite.add(newSelectableItem("Basic widgets - Picto", PictoWidgetPage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Basic widgets - Image", ImageWidgetPage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Basic widgets - Drawing", VectorWidgetPage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Progress bar", ProgressBarPage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Scrollable list", ScrollableListPage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Scrollable text", ScrollableTextPage.class.getName())); //$NON-NLS-1$
-		Scroll scroll = new Scroll(false,true);
+		listComposite.add(newSelectableItem("Game", PictoWidgetPage.class.getName())); //$NON-NLS-1$
+		listComposite.add(newSelectableItem("Score", ImageWidgetPage.class.getName())); //$NON-NLS-1$
+		listComposite.add(newSelectableItem("Settings", VectorWidgetPage.class.getName())); //$NON-NLS-1$
+		Scroll scroll = new Scroll(false, true);
 		scroll.setWidget(listComposite);
 		return scroll;
 	}
