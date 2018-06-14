@@ -23,28 +23,25 @@ public class MainPage extends Page {
 		List Btnlist = new List(false);
 		Label title = new Label("Containers");
 		title.addClassSelector("TITLE");
-		ButtonWrapper split = new ButtonWrapper();
-		split.setWidget(new Label("SPLIT"));
-		ButtonWrapper border = new ButtonWrapper();
-		border.setWidget(new Label("DOCK"));
-		ButtonWrapper list = new ButtonWrapper();
-		list.setWidget(new Label("LIST"));
-		ButtonWrapper grid = new ButtonWrapper();
-		grid.setWidget(new Label("GRID"));
+		ButtonWrapper game = new ButtonWrapper();
+		game.setWidget(new Label("Game"));
+		ButtonWrapper score = new ButtonWrapper();
+		score.setWidget(new Label("Score"));
+		ButtonWrapper settings = new ButtonWrapper();
+		settings.setWidget(new Label("Settings"));
 
-		Btnlist.add(split);
-		Btnlist.add(border);
-		Btnlist.add(list);
-		Btnlist.add(grid);
+		Btnlist.add(game);
+		Btnlist.add(score);
+		Btnlist.add(settings);
 		this.container.setFirst(title);
 		this.container.setLast(Btnlist);
 		setWidget(this.container);
 
 		// ButtonEvent handler
-		split.addOnClickListener(new OnClickListener() {
+		game.addOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick() {
-				Program.show(new SplitPage());
+				Program.show(new GamePage());
 			}
 		});
 	}

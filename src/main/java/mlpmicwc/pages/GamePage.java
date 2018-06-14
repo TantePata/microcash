@@ -16,10 +16,10 @@ import mlpmicwc.Program;
 /**
  *
  */
-public class SplitPage extends Page {
+public class GamePage extends Page {
 	private static Split split;
 
-	public SplitPage() {
+	public GamePage() {
 
 		split = new Split(false, (float) 0.2);
 		Label stitle = new Label("SPLIT Page");
