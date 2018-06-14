@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Application-Id: microCash
-Application-Version: 0.1.0
-Application-PrintableName: microCash
-Application-Description: microCash
-Application-IconsDirectory: icons
-Application-Activities: mlpmicwc.Program
