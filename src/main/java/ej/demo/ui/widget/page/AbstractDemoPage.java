@@ -33,6 +33,7 @@ public abstract class AbstractDemoPage extends Page {
 
 	private Dock content;
 	Label titleLabel;
+	Image cash;
 
 	/**
 	 * Creates a new demo page.
@@ -81,6 +82,7 @@ public abstract class AbstractDemoPage extends Page {
 	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
 		// TODO Auto-generated method stub
 		super.renderContent(g, style, bounds);
+
 	}
 
 	/**
