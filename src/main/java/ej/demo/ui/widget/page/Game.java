@@ -9,10 +9,14 @@ package ej.demo.ui.widget.page;
 import ej.animation.Animation;
 import ej.container.Canvas;
 import ej.demo.ui.widget.style.Images;
+import ej.microui.display.GraphicsContext;
 import ej.microui.event.Event;
+import ej.microui.event.generator.Buttons;
 import ej.microui.event.generator.Pointer;
 import ej.microui.util.EventHandler;
 import ej.mwt.Widget;
+import ej.style.Style;
+import ej.style.container.Rectangle;
 import ej.widget.basic.Image;
 import ej.widget.basic.image.ImageHelper;
 
@@ -21,30 +25,50 @@ import ej.widget.basic.image.ImageHelper;
  */
 public class Game extends AbstractDemoPage implements EventHandler, Animation {
 
-	int score = 0;
-	Canvas canvas;
-	boolean first = false;
+	static int score = 0;
+	static int oldx = 0;
+	static int oldy = 0;
+	static int x = 0;
+	static int y = 0;
+	static Canvas canvas;
+
+	public Game() {
+
+	}
 
 	@Override
 	protected String getTitle() {
-		return "Game"; //$NON-NLS-1$
+		return "Game : " + this.score + "$"; //$NON-NLS-1$
+	}
+
+	@Override
+	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
+		// TODO Auto-generated method stub
+		super.renderContent(g, style, bounds);
+		System.out.println(this.score);
+		System.out.println(this.x);
+		System.out.println(this.y);
+		this.canvas.add(newImage(Images.CASH_500), this.x, this.y, 0, 0);
+		// Label scoreLabel = new Label("Score : " + this.score + "€");
+		// this.canvas.add(scoreLabel, 440 - 300, 196 - 46, 0, 0);
+	}
+
+	@Override
+	public Rectangle validateContent(Style style, Rectangle bounds) {
+		// TODO Auto-generated method stub
+		return super.validateContent(style, bounds);
 	}
 
 	@Override
 	protected Widget createMainContent() {
-		if (this.first == false) {
-			this.score = 50000;
-			System.out.println("test");
+		this.score = 50000;
 
-			this.canvas = new Canvas();
+		this.canvas = new Canvas();
 
-			this.canvas.add(newImage(Images.HAND), 480 - 300, 106 - 83, 0, 0);
-			this.canvas.add(newImage(Images.CASH_500), 440 - 300, 106 - 46, 0, 0);
-			this.first = true;
-		}
+		this.canvas.add(newImage(Images.HAND), 480 - 300, 106 - 83, 0, 0);
+		this.canvas.add(newImage(Images.CASH_500), 440 - 300, 106 - 46, 0, 0);
 
 		// TODO Auto-generated method stub
-
 		return this.canvas;
 
 	}
@@ -60,25 +84,21 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 		if (Event.getType(event) == Event.POINTER) {
 
 			Pointer ptr = (Pointer) Event.getGenerator(event);
-			this.canvas.add(newImage(Images.CASH_500), ptr.getX(), ptr.getY(), 0, 0);
-			this.score -= 500;
-			System.out.println(this.score);
-			/*
-			 * Game.this.score -= 500; Label scoreLabel = new Label("Score : " +
-			 * Game.this.score + "€"); this.canvas.add(scoreLabel, 440 - 300,
-			 * 196 - 46, 0, 0);
-			 */
-			/*
-			 * if (Buttons.getAction(event) == Pointer.DRAGGED) { this.dragged =
-			 * true; } else if (Buttons.getAction(event) == Buttons.PRESSED) {
-			 * this.oldX = p.getX(); this.oldY = p.getY(); } else if
-			 * (Buttons.getAction(event) == Buttons.RELEASED) { final int x =
-			 * p.getX(); final int y = p.getY();
-			 *
-			 * if (this.dragged) { this.dragged = false;
-			 * this.controler.swipe(this.oldX, this.oldY, x, y); } else {
-			 * this.controler.input(x, y); } }
-			 */
+
+			if (Buttons.getAction(event) == Pointer.DRAGGED) {
+				this.x = ptr.getX();
+				this.y = ptr.getY();
+			} else if (Buttons.getAction(event) == Buttons.RELEASED) {
+				if (this.x + 5 < this.oldx) {
+					this.score -= 500;
+				}
+
+			} else if (Buttons.getAction(event) == Buttons.PRESSED) {
+				this.oldx = ptr.getX();
+				this.oldy = ptr.getY();
+				this.x = ptr.getX();
+				this.y = ptr.getY();
+			}
 			repaint();
 			return true;
 		}

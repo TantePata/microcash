@@ -13,9 +13,12 @@ import ej.demo.ui.widget.style.ClassSelectors;
 import ej.demo.ui.widget.style.Images;
 import ej.demo.ui.widget.style.Pictos;
 import ej.exit.ExitHandler;
+import ej.microui.display.GraphicsContext;
 import ej.mwt.Desktop;
 import ej.mwt.Widget;
 import ej.navigation.page.Page;
+import ej.style.Style;
+import ej.style.container.Rectangle;
 import ej.widget.basic.Image;
 import ej.widget.basic.Label;
 import ej.widget.basic.image.ImageHelper;
@@ -29,6 +32,7 @@ import ej.widget.listener.OnClickListener;
 public abstract class AbstractDemoPage extends Page {
 
 	private Dock content;
+	Label titleLabel;
 
 	/**
 	 * Creates a new demo page.
@@ -73,6 +77,12 @@ public abstract class AbstractDemoPage extends Page {
 		return this.content;
 	}
 
+	@Override
+	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
+		// TODO Auto-generated method stub
+		super.renderContent(g, style, bounds);
+	}
+
 	/**
 	 * Creates the widget representing the top bar of the page.
 	 *
@@ -80,11 +90,11 @@ public abstract class AbstractDemoPage extends Page {
 	 */
 	protected Widget createTopBar() {
 		// The title of the page.
-		Label titleLabel = new Label(getTitle());
-		titleLabel.addClassSelector(ClassSelectors.TITLE);
+		this.titleLabel = new Label(getTitle());
+		this.titleLabel.addClassSelector(ClassSelectors.TITLE);
 
 		Dock topBar = new Dock();
-		topBar.setCenter(titleLabel);
+		topBar.setCenter(this.titleLabel);
 
 		if (WidgetsDemo.canGoBack()) {
 			// Add a back button.
