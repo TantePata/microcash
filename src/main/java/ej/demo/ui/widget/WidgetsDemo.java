@@ -6,6 +6,8 @@
  */
 package ej.demo.ui.widget;
 
+import java.util.Arrays;
+
 import ej.demo.ui.widget.page.DirectURLResolver;
 import ej.demo.ui.widget.page.MainPage;
 import ej.demo.ui.widget.style.StylesheetPopulator;
@@ -29,8 +31,14 @@ public class WidgetsDemo {
 	private static boolean GoingForward;
 	private static boolean GoingBackward;
 
+	public static int[] score;
+
 	// Prevents initialization.
 	private WidgetsDemo() {
+	}
+
+	public static int[] getScoreList() {
+		return score;
 	}
 
 	/**
@@ -40,6 +48,11 @@ public class WidgetsDemo {
 	 *            not used.
 	 */
 	public static void main(String[] args) {
+		score = new int[25];
+		for (int i = 0; i < 10; i++) {
+			score[i] = i * 100;
+		}
+		Arrays.sort(score);
 		MicroUI.start();
 		Desktop = newTransitionDesktop();
 		StylesheetPopulator.initialize();
@@ -79,11 +92,14 @@ public class WidgetsDemo {
 	}
 
 	/**
-	 * Checks whether or not it is possible to go back in the navigation history.
+	 * Checks whether or not it is possible to go back in the navigation
+	 * history.
 	 * <p>
-	 * Beware, the result of this method consider that it is called while creating the new page.
+	 * Beware, the result of this method consider that it is called while
+	 * creating the new page.
 	 *
-	 * @return <code>true</code> it is possible to go back, <code>false</code> otherwise.
+	 * @return <code>true</code> it is possible to go back, <code>false</code>
+	 *         otherwise.
 	 */
 	public static boolean canGoBack() {
 		int historySize = Desktop.getHistorySize();
