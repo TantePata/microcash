@@ -28,15 +28,10 @@ public class MainPage extends AbstractDemoPage {
 
 	@Override
 	protected Widget createMainContent() {
-		// layout:
-		// Basic widgets - Picto
-		// Basic widgets - Drawing
-		// Progress bar
-		// Scrollable list
 
 		List listComposite = new List(false);
 		listComposite.add(newSelectableItem("Game", Game.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Score", Score.class.getName())); //$NON-NLS-1$
+		listComposite.add(newSelectableItem("Score", ScorePage.class.getName())); //$NON-NLS-1$
 		listComposite.add(newSelectableItem("Settings", Settings.class.getName())); //$NON-NLS-1$
 		Scroll scroll = new Scroll(false, true);
 		scroll.setWidget(listComposite);
