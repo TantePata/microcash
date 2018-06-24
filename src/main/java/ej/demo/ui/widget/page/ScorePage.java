@@ -6,6 +6,8 @@
  */
 package ej.demo.ui.widget.page;
 
+import java.util.Arrays;
+
 import ej.bon.Timer;
 import ej.bon.TimerTask;
 import ej.components.dependencyinjection.ServiceLoaderFactory;
@@ -27,7 +29,6 @@ public class ScorePage extends AbstractDemoPage {
 	private static final int FIRST_SHOT_COUNT = 20;
 
 	private List listComposite;
-	private boolean complete;
 	int[] sc;
 
 	@Override
@@ -48,8 +49,10 @@ public class ScorePage extends AbstractDemoPage {
 
 	private void loadScore() {
 		this.sc = WidgetsDemo.score;
+
+		Arrays.sort(this.sc);
 		this.listComposite = new List(false);
-		for (int i = this.sc.length - 1; i >= 0; i--) {
+		for (int i = 0; i < this.sc.length; i++) {
 			Label item = new Label("" + this.sc[i]); //$NON-NLS-1$
 			item.addClassSelector(ClassSelectors.LIST_ITEM);
 			this.listComposite.add(item);
@@ -65,27 +68,24 @@ public class ScorePage extends AbstractDemoPage {
 	@Override
 	public void showNotify() {
 		super.showNotify();
-		if (!ScorePage.this.complete) {
-			// Add missing items.
-			Timer timer = ServiceLoaderFactory.getServiceLoader().getService(Timer.class);
-			timer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					if (isShown()) {
-						getDesktop().getDisplay().callSerially(new Runnable() {
-							@Override
-							public void run() {
-								if (!ScorePage.this.complete) {
-									ScorePage.this.complete = true;
-									loadScore();
-								}
-							}
-						});
-						revalidate();
-					}
+		System.out.println("??");
+		System.out.println("?");
+		// Add missing items.
+		Timer timer = ServiceLoaderFactory.getServiceLoader().getService(Timer.class);
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (isShown()) {
+					getDesktop().getDisplay().callSerially(new Runnable() {
+						@Override
+						public void run() {
+							loadScore();
+						}
+					});
+					revalidate();
 				}
-			}, APPEARANCE_DELAY);
-		}
+			}
+		}, APPEARANCE_DELAY);
 	}
 
 }

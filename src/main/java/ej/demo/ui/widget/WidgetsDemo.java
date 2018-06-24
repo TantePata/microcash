@@ -32,6 +32,9 @@ public class WidgetsDemo {
 	private static boolean GoingBackward;
 
 	public static int[] score;
+	public static Boolean isInsert;
+
+	public static int nbScores = 0;
 
 	// Prevents initialization.
 	private WidgetsDemo() {
@@ -50,10 +53,14 @@ public class WidgetsDemo {
 	public static void main(String[] args) {
 		score = new int[25];
 		for (int i = 0; i < 10; i++) {
-			score[i] = i * 100;
+			score[i] = i * -100;
+			nbScores += 1;
 		}
 		Arrays.sort(score);
 		MicroUI.start();
+
+		isInsert = new Boolean(false);
+
 		Desktop = newTransitionDesktop();
 		StylesheetPopulator.initialize();
 		Desktop.show(MainPage.class.getName());

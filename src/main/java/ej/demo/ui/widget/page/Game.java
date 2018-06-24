@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import ej.animation.Animation;
 import ej.container.Canvas;
+import ej.demo.ui.widget.WidgetsDemo;
 import ej.microui.display.Colors;
 import ej.microui.display.GraphicsContext;
 import ej.microui.display.Image;
@@ -57,7 +58,6 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 
 	@Override
 	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
-		// TODO Auto-generated method stub
 		super.renderContent(g, style, bounds);
 
 		g.drawImage(this.hand, 480 - this.hand.getWidth(), 135 - (this.hand.getHeight() / 2), GraphicsContext.LEFT);
@@ -81,6 +81,11 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 				g.drawString("Vous etes pauvre, pas mal : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
 			} else {
 				g.drawString("Super vous etes endetter ! BRAVO : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
+			}
+			if (!WidgetsDemo.isInsert.booleanValue()) {
+				WidgetsDemo.score[(WidgetsDemo.nbScores < 25 ? WidgetsDemo.nbScores : 24)] = this.score;
+				WidgetsDemo.nbScores += 1;
+				WidgetsDemo.isInsert = new Boolean("true");
 			}
 		} else {
 			g.drawString("Score : " + this.score + "$", 20, 250, GraphicsContext.LEFT);
