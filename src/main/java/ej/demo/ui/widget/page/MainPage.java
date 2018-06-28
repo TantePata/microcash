@@ -32,7 +32,7 @@ public class MainPage extends AbstractDemoPage {
 		List listComposite = new List(false);
 		listComposite.add(newSelectableItem("Game", Game.class.getName())); //$NON-NLS-1$
 		listComposite.add(newSelectableItem("Score", ScorePage.class.getName())); //$NON-NLS-1$
-		listComposite.add(newSelectableItem("Settings", Settings.class.getName())); //$NON-NLS-1$
+		listComposite.add(newSelectableItem("Settings", SettingPage2.class.getName())); //$NON-NLS-1$
 		Scroll scroll = new Scroll(false, true);
 		scroll.setWidget(listComposite);
 		return scroll;

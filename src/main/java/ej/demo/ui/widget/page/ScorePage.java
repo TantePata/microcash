@@ -57,19 +57,11 @@ public class ScorePage extends AbstractDemoPage {
 			item.addClassSelector(ClassSelectors.LIST_ITEM);
 			this.listComposite.add(item);
 		}
-		/*
-		 * for (int i = start; i <= end; i++) { Label item = new
-		 * Label(SCORE_PREFIX + i);
-		 * item.addClassSelector(ClassSelectors.LIST_ITEM);
-		 * this.listComposite.add(item); }
-		 */
 	}
 
 	@Override
 	public void showNotify() {
 		super.showNotify();
-		System.out.println("??");
-		System.out.println("?");
 		// Add missing items.
 		Timer timer = ServiceLoaderFactory.getServiceLoader().getService(Timer.class);
 		timer.schedule(new TimerTask() {
