@@ -33,7 +33,6 @@ public abstract class AbstractDemoPage extends Page {
 
 	private Dock content;
 	Label titleLabel;
-	Image cash;
 
 	/**
 	 * Creates a new demo page.
@@ -70,7 +69,7 @@ public abstract class AbstractDemoPage extends Page {
 		super.show(desktop);
 	}
 
-	private Widget createContent() {
+	protected Widget createContent() {
 		this.content = new Dock();
 		this.content.setHorizontal(false);
 		this.content.setFirst(createTopBar());

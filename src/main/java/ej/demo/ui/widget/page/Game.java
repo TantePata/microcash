@@ -9,6 +9,8 @@ package ej.demo.ui.widget.page;
 import java.io.IOException;
 
 import ej.animation.Animation;
+import ej.animation.Animator;
+import ej.components.dependencyinjection.ServiceLoaderFactory;
 import ej.container.Canvas;
 import ej.demo.ui.widget.WidgetsDemo;
 import ej.microui.display.Colors;
@@ -38,17 +40,26 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 	static Canvas canvas;
 	Image cash, hand;
 	boolean animated = true;
+	boolean timerBlocked = true;
 
 	public Game() {
-		this.score = 5000;
-		this.timer = 30;
 		try {
 			this.cash = Image.createImage("/images/500euros.png");
 			this.hand = Image.createImage("/images/hand.png");
+			ServiceLoaderFactory.getServiceLoader().getService(Animator.class, Animator.class).startAnimation(this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		this.init();
+	}
+
+	private void init() {
+		this.score = 15000;
+		this.timer = 300;
+		this.timerBlocked = true;
+		this.animated = true;
 	}
 
 	@Override
@@ -59,7 +70,6 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 	@Override
 	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
 		super.renderContent(g, style, bounds);
-
 		g.drawImage(this.hand, 480 - this.hand.getWidth(), 135 - (this.hand.getHeight() / 2), GraphicsContext.LEFT);
 		g.drawImage(this.cash, 258 - (this.cash.getWidth() / 2), 135 - (this.cash.getHeight() / 2),
 				GraphicsContext.LEFT);
@@ -71,25 +81,26 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 					GraphicsContext.LEFT);
 		}
 		g.setColor(Colors.WHITE);
-		System.out.println(this.timer);
+		// System.out.println(this.timer);
 		if (this.timer <= 0) {
-			if (this.score > 2500) {
-				g.drawString("Vous etes toujours riche ! Bouh : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
-			} else if (this.score > 1000) {
-				g.drawString("Vous etes un classe moyenne... Bof : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
+			if (this.score > 7500) {
+				g.drawString("Vous etes toujours riche ! Bouh : " + this.score + "$", 150, 25, GraphicsContext.LEFT);
+			} else if (this.score > 2000) {
+				g.drawString("Vous etes un classe moyenne... Bof : " + this.score + "$", 150, 25, GraphicsContext.LEFT);
 			} else if (this.score > 0) {
-				g.drawString("Vous etes pauvre, pas mal : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
+				g.drawString("Vous etes pauvre, pas mal : " + this.score + "$", 150, 25, GraphicsContext.LEFT);
 			} else {
-				g.drawString("Super vous etes endetter ! BRAVO : " + this.score + "$", 200, 25, GraphicsContext.LEFT);
+				g.drawString("Super vous etes endetté ! BRAVO : " + this.score + "$", 150, 25, GraphicsContext.LEFT);
 			}
 			if (!WidgetsDemo.isInsert.booleanValue()) {
 				WidgetsDemo.score[(WidgetsDemo.nbScores < 25 ? WidgetsDemo.nbScores : 24)] = this.score;
 				WidgetsDemo.nbScores += 1;
 				WidgetsDemo.isInsert = new Boolean("true");
 			}
+
 		} else {
 			g.drawString("Score : " + this.score + "$", 20, 250, GraphicsContext.LEFT);
-			g.drawString("Timer : " + this.timer + "s", 20, 235, GraphicsContext.LEFT);
+			g.drawString("Timer : " + this.timer / 10 + "s", 20, 235, GraphicsContext.LEFT);
 		}
 	}
 
@@ -105,20 +116,9 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 	protected Widget createMainContent() {
 		this.canvas = new Canvas();
 
-		// this.canvas.add(newImage(Images.HAND), 480 - 300, 106 - 83, 0, 0);
-		// this.canvas.add(newImage(Images.CASH_500), 440 - 300, 106 - 46, 0,
-		// 0);
-
-		// TODO Auto-generated method stub
 		return this.canvas;
 
 	}
-
-	// A button that leads to the given page.
-	// static Image newImage(final String name) {
-	// Image img = new Image(.loadImage(name));
-	// return img;
-	// }
 
 	@Override
 	public boolean handleEvent(int event) {
@@ -132,11 +132,13 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 			} else if (Buttons.getAction(event) == Buttons.RELEASED) {
 				if (this.x + 5 < this.oldx) {
 					this.score -= 500;
-					this.timer -= 1;
-
+					/*
+					 * while (this.x == this.x + 300) { this.x += 15; }
+					 */
 				}
 
 			} else if (Buttons.getAction(event) == Buttons.PRESSED) {
+				this.timerBlocked = false;
 				this.oldx = ptr.getX();
 				this.oldy = ptr.getY();
 				this.x = ptr.getX();
@@ -144,17 +146,28 @@ public class Game extends AbstractDemoPage implements EventHandler, Animation {
 			}
 			repaint();
 			return true;
+		} else if (Event.getType(event) == Event.POINTER && this.timer <= 0) {
+			System.out.println(this.timer);
+			this.init();
+			WidgetsDemo.show(MainPage.class.getName());
+			repaint();
+			return true;
+
 		}
 		return super.handleEvent(event);
 	}
 
 	@Override
 	public boolean tick(long currentTimeMillis) {
-		if (this.timer > 0) {
-			this.timer -= 1;
+		if (this.timerBlocked == false) {
+			if (this.timer > 0) {
+				this.timer -= 1;
+				this.animated = true;
+			}
+
+			// TODO Auto-generated method stub
 		}
 		repaint();
-		// TODO Auto-generated method stub
 		return this.animated;
 	}
 
