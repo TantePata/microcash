@@ -30,7 +30,7 @@ import ej.widget.listener.OnValueChangeListener;
 /**
  * Haptic widgets demonstration page.
  */
-public class SettingPage2 extends Page {
+public class Settings extends Page {
 
 	Label titleLabel = new Label("Settings");
 	public static Label lvlLabel = new Label("Normal");
@@ -43,7 +43,7 @@ public class SettingPage2 extends Page {
 	public static Dock content = new Dock();
 
 	@SuppressWarnings("javadoc")
-	public SettingPage2() {
+	public Settings() {
 
 		// this.split.setFirst(createTopBar());
 		// this.split.setLast(this.btn2);
@@ -55,17 +55,18 @@ public class SettingPage2 extends Page {
 			public void onValueChange(int newValue) {
 				// TODO Auto-generated method stub
 				if (newValue == 0) {
-					SettingPage2.lvlLabel.setText("fode");
+					Settings.lvlLabel.setText("fode");
 				}
 				if (newValue == 1) {
-					SettingPage2.lvlLabel.setText("normal");
+					Settings.lvlLabel.setText("normal");
 				}
 				if (newValue == 2) {
-					SettingPage2.lvlLabel.setText("easy");
+					Settings.lvlLabel.setText("easy");
 				}
 				if (newValue == 3) {
-					SettingPage2.lvlLabel.setText("juif");
+					Settings.lvlLabel.setText("juif");
 				}
+				WidgetsDemo.lvl = newValue;
 			}
 
 			@Override
@@ -81,7 +82,7 @@ public class SettingPage2 extends Page {
 			}
 		});
 
-		this.list.add(SettingPage2.lvlLabel);
+		this.list.add(Settings.lvlLabel);
 		this.list.add(slider);
 
 		this.list.setHorizontal(false);
