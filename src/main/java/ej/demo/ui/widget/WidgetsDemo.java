@@ -35,6 +35,7 @@ public class WidgetsDemo {
 	public static Boolean isInsert;
 
 	public static int nbScores = 0;
+	public static int lvl = 0;
 
 	// Prevents initialization.
 	private WidgetsDemo() {
