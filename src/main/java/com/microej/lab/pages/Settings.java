@@ -24,7 +24,7 @@ public class Settings extends Page {
 
 	Dock content;
 
-	public static Label lvlLabel = new Label("Normal");
+	public Label lvlLabel = new Label("Normal");
 
 	public Settings() {
 		this.split = new Split(false, 0.23f);
@@ -38,13 +38,13 @@ public class Settings extends Page {
 			public void onValueChange(int newValue) {
 				// TODO Auto-generated method stub
 				if (newValue == 0) {
-					Settings.lvlLabel.setText("fode");
+					lvlLabel.setText("fode");
 				} else if (newValue == 1) {
-					Settings.lvlLabel.setText("normal");
+					lvlLabel.setText("normal");
 				} else if (newValue == 2) {
-					Settings.lvlLabel.setText("easy");
+					lvlLabel.setText("easy");
 				} else if (newValue == 3) {
-					Settings.lvlLabel.setText("juif");
+					lvlLabel.setText("juif");
 				}
 				Program.lvl = newValue;
 			}
@@ -62,7 +62,7 @@ public class Settings extends Page {
 			}
 		});
 
-		this.list.add(Settings.lvlLabel);
+		this.list.add(lvlLabel);
 		this.list.add(slider);
 
 		this.list.setHorizontal(false);
