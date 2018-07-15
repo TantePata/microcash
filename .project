@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ej.demo.ui.widget</name>
+	<name>WDGT_Lab5_anim</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,9 +10,20 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>com.is2t.microej.wadapps.workbench.wadappsWorkbenchBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.is2t.microej.addonprocessor.addonProcessorBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.apache.ivyde.eclipse.ivynature</nature>
+		<nature>com.is2t.microej.wadapps.workbench.wadappsApplicationNature</nature>
 	</natures>
 </projectDescription>

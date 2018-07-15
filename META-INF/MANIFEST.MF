@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Application-Id: Lab4
+Application-Version: 0.1.0
+Application-PrintableName: Lab4
+Application-Description: Lab4
+Application-Activities: com.microej.lab.Program
+
+

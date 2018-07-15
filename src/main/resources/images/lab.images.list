@@ -1,0 +1,16 @@
+# Copyright 2014-2015 IS2T. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be found at http://www.is2t.com/open-source-bsd-license/.
+
+images/check.png:ARGB8888
+images/Home.png
+images/robot.png
+images/exit.png
+images/btnblue.png
+images/btngreen.png
+images/btngrey.png
+images/btnitm.png
+images/500euros.png
+images/100euros.png
+images/50euros.png
+images/hand.png
+images/black-hand.png
